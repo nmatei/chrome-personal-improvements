@@ -1,0 +1,32 @@
+{
+  "name": "personal-improvements",
+  "version": "1.0.0",
+  "description": "Chrome Personal improvements",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch-test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmatei/chrome-bible-utilities.git"
+  },
+  "author": "Nicolae Matei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nmatei/chrome-bible-utilities/issues"
+  },
+  "homepage": "https://github.com/nmatei/chrome-bible-utilities#readme",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFiles": [
+      "<rootDir>/views/common/utilities.js"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "ts-jest": "^29.0.5"
+  }
+}
