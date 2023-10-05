@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nmatei/chrome-bible-utilities.git"
+    "url": "git+https://github.com/nmatei/chrome-personal-improvements.git"
   },
   "author": "Nicolae Matei",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nmatei/chrome-bible-utilities/issues"
+    "url": "https://github.com/nmatei/chrome-personal-improvements/issues"
   },
-  "homepage": "https://github.com/nmatei/chrome-bible-utilities#readme",
+  "homepage": "https://github.com/nmatei/chrome-personal-improvements#readme",
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
