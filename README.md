@@ -8,6 +8,7 @@ in chrome for each website.
 ## 💠 Features & Usage
 
 - [x] Add `🔲 Fullscreen` button in context menu to widgets in *.fusionsolar.huawei.com
+- [x] Add `🔲 Fullscreen` & `🔲 Distraction free mode` button in context menu to widgets in https://twitter.com/home
 - [ ] ...
 
 ## ⚙ Setup Plugin as Developer
