@@ -1,0 +1,24 @@
+.distraction-free-mode div[data-testid="sidebarColumn"] {
+    display: none;
+}
+
+.distraction-free-mode div[data-testid="primaryColumn"] {
+    max-width: 6000px;
+}
+
+.fullscreen-mode div[data-testid="sidebarColumn"] {
+    display: none;
+}
+
+.fullscreen-mode div[data-testid="primaryColumn"] {
+    max-width: 6000px;
+}
+
+.fullscreen-mode header[role="banner"] {
+    display: none;
+}
+
+.fullscreen-mode main>:first-child {
+    width: 100% !important;
+}
+
