@@ -25,6 +25,17 @@
       "matches": ["https://twitter.com/home/*"],
       "js": ["views/twitter/index.js"],
       "css": ["views/twitter/overrides.css"]
+    },
+    {
+      "matches": ["http://app.norless.com/template/output.html", "http://app-ua.norless.com/template/output.html"],
+      "js": ["views/norless/index.js"],
+      "css": ["views/norless/overrides.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["views/norless/3168883-1-1.jpg"],
+      "matches": ["http://app.norless.com/*"]
     }
   ],
   "icons": {
