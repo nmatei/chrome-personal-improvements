@@ -7,4 +7,11 @@ body {
   background-repeat: no-repeat !important;
   background-position: center center !important;
   background-image: url("chrome-extension://__MSG_@@extension_id__/views/norless/3168883-1-1.jpg") !important;
+
+  text-shadow: 4px 2px 4px black;
+}
+
+body.greenscreen #holder_text,
+body.greenscreen #holder_title {
+  -webkit-text-stroke: unset !important;
 }
