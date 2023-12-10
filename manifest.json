@@ -30,6 +30,10 @@
       "matches": ["http://app.norless.com/template/output.html", "http://app-ua.norless.com/template/output.html"],
       "js": ["views/norless/index.js"],
       "css": ["views/norless/overrides.css"]
+    },
+    {
+      "matches": ["https://eu.salusconnect.io/*", "https://qa.eu.salusconnect.io/*"],
+      "css": ["views/salusconnect/overrides.css"]
     }
   ],
   "web_accessible_resources": [
