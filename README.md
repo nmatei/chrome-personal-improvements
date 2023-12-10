@@ -5,12 +5,12 @@
 ✨ This extension is an example of how to **personalize** your experience 
 in chrome for each website.
 
-## 💠 Features & Usage
+## 💠 Features
 
-- [x] Add `🔲 Fullscreen` button in context menu to widgets in *.fusionsolar.huawei.com
-- [x] Add `🔲 Fullscreen` & `🔲 Distraction free mode` button in context menu to widgets in https://twitter.com/home
+- [x] `🔲 Fullscreen` in context menu to widgets in fusionsolar.huawei.com
+- [x] `🔲 Fullscreen` & `🔲 Distraction free mode` in context menu to widgets in [twitter.com](https://twitter.com/home)
 - [x] Background image for *.norless.com
-- [x] Allow text selection inside [eu.salusconnect.io](https://eu.salusconnect.io)
+- [x] More Text selection in [eu.salusconnect.io](https://eu.salusconnect.io)
 - [ ] ...
 
 ## ⚙ Setup Plugin as Developer
