@@ -6,7 +6,8 @@ document.body.addEventListener("contextmenu", e => {
 
     const menu = getContextMenu([
       {
-        text: "🔲 Fullscreen",
+        text: "Fullscreen",
+        icon: "🔲",
         itemId: "fullscreen",
         handler: target => {
           content.requestFullscreen();

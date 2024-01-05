@@ -1,6 +1,6 @@
 {
   "name": "Personal improvements",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Chrome Personal improvements ✨",
   "manifest_version": 3,
   "author": "Matei Nicolae",
@@ -9,12 +9,11 @@
   },
   "action": {},
   "permissions": ["activeTab"],
-  "host_permissions": ["https://region02eu5.fusionsolar.huawei.com/*"],
   "content_scripts": [
     {
-      "matches": ["https://region02eu5.fusionsolar.huawei.com/*", "https://twitter.com/home/*"],
-      "js": ["views/common/utilities.js", "views/tooltip/tooltip.js"],
-      "css": ["views/tooltip/tooltip.css"]
+      "matches": ["https://region02eu5.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "http://app.norless.com/*", "http://app-ua.norless.com/*"],
+      "js": ["views/common/utilities.js", "views/common/tooltip/tooltip.js"],
+      "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css"]
     },
     {
       "matches": ["https://region02eu5.fusionsolar.huawei.com/*"],

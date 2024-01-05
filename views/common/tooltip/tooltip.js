@@ -3,6 +3,7 @@ function showByCursor(el, e, offsets = [0, 0]) {
   el.style.top = e.clientY + offsets[1] + "px";
   el.style.display = "block";
 }
+
 function showBy(el, target, offsets = [0, 0], align = "bottom") {
   el.style.display = "block";
   const bounds = target.getBoundingClientRect();
@@ -40,27 +41,33 @@ function createContextMenu(id = "context-menu") {
   return menu;
 }
 
-// TODO - close menu when click outside
 function getContextMenu(items) {
   const menu = createContextMenu("context-menu");
 
   const contentItems = items
-    .map((item, i) => `<button type="button" class="action-btn"
-      ${item.onmouseenter ? `onmouseenter="${item.onmouseenter}"` : ''} 
+    .map(
+      (item, i) => `<button type="button" class="action-btn ${item.cls ? item.cls : ""}"
+      ${item.onmouseenter ? `onmouseenter="${item.onmouseenter}"` : ""} 
       data-idx="${i}" data-id="${item.itemId}">
-        ${item.text}
-      </button>`)
+        <span class='menu-icon'>${item.icon || ""}</span>
+        <spam class="action-btn-text">${item.text}</spam>
+      </button>`
+    )
     .join("");
   menu.innerHTML = `<div class="context-menu-layout">${contentItems}</div>`;
 
   menu.addEventListener("click", e => {
     e.stopPropagation();
     e.preventDefault();
-    if (e.target.matches(".action-btn")) {
-      const item = items[e.target.dataset.idx];
-      item.handler && item.handler(e.target);
+    const btn = e.target.closest(".action-btn");
+    if (btn) {
+      const item = items[btn.dataset.idx];
+      item.handler && item.handler(btn);
     }
   });
+  // setTimeout(() => {
+  //   menu.querySelector(".action-btn").focus();
+  // }, 200);
   return menu;
 }
 
