@@ -63,8 +63,79 @@ function waitElement(selector, timeout = 30000, retryInterval = 100) {
   });
 }
 
-if (typeof module === "object" && typeof module.exports === "object") {
-  module.exports = {
-    
+function getInnerToClipboard(html) {
+  return new Promise(resolve => {
+    const iframe = document.createElement("iframe");
+    document.body.appendChild(iframe);
+    iframe.contentWindow.document.open();
+    iframe.contentWindow.document.write(html);
+    iframe.contentWindow.document.close();
+    iframe.onload = function () {
+      const text = iframe.contentWindow.document.body.innerText;
+      resolve(text);
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+      }, 100);
+    };
+  });
+}
+
+function copyToClipboard(text) {
+  const iframe = document.createElement("iframe");
+  iframe.onload = function () {
+    const doc = iframe.contentWindow.document;
+    execCopy(text, doc);
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+    }, 100);
   };
+  document.body.appendChild(iframe);
+}
+
+function execCopy(text, doc) {
+  if (doc.queryCommandSupported && doc.queryCommandSupported("copy")) {
+    const textarea = doc.createElement("textarea");
+    textarea.textContent = text;
+    // Prevent scrolling to bottom of page in MS Edge.
+    textarea.style.position = "fixed";
+    doc.body.appendChild(textarea);
+    textarea.select();
+    try {
+      // Security exception may be thrown by some browsers.
+      return doc.execCommand("copy");
+    } catch (ex) {
+      //<debug>
+      console.warn("Copy to clipboard failed.", ex);
+      //</debug>
+      return false;
+    } finally {
+      doc.body.removeChild(textarea);
+    }
+  }
+}
+
+function download(text, name, type) {
+  const anchor = document.createElement("a");
+  anchor.className = "download-js-link";
+  anchor.id = "download-html";
+  anchor.innerHTML = "downloading...";
+  anchor.style.display = "none";
+  document.body.appendChild(anchor);
+
+  const file = new Blob([text], { type: type });
+  anchor.href = URL.createObjectURL(file);
+  anchor.download = name;
+  anchor.click();
+  document.body.removeChild(anchor);
+}
+
+function maskElement(element) {
+  element.classList.add("extension-loading-mask");
+}
+function unmaskElement(element) {
+  element.classList.remove("extension-loading-mask");
+}
+
+if (typeof module === "object" && typeof module.exports === "object") {
+  module.exports = {};
 }

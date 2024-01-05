@@ -26,9 +26,12 @@
       "css": ["views/twitter/overrides.css"]
     },
     {
+      "matches": ["http://app.norless.com/*", "http://app-ua.norless.com/*"],
+      "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/index.js"]
+    },
+    {
       "matches": ["http://app.norless.com/template/output.html", "http://app-ua.norless.com/template/output.html"],
-      "js": ["views/norless/index.js"],
-      "css": ["views/norless/overrides.css"]
+      "css": ["views/norless/output-overrides.css"]
     },
     {
       "matches": ["https://eu.salusconnect.io/*", "https://qa.eu.salusconnect.io/*"],

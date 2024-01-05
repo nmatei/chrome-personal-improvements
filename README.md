@@ -9,7 +9,10 @@ in chrome for each website.
 
 - [x] `🔲 Fullscreen` in context menu to widgets in fusionsolar.huawei.com
 - [x] `🔲 Fullscreen` & `🔲 Distraction free mode` in context menu to widgets in [twitter.com](https://twitter.com/home)
-- [x] Background image for [app.norless.com](http://app.norless.com/)
+- [x] Enhancements for [app.norless.com](http://app.norless.com/)
+  - [x] Background image in output page
+  - [x] (context menu in list) 📩 Save Playlist as HTML
+  - [x] (context menu in list) 📋 Copy Playlist to Clipboard
 - [x] More Text selection in [eu.salusconnect.io](https://eu.salusconnect.io)
 - [ ] ...
 
