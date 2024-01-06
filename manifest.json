@@ -8,7 +8,7 @@
     "service_worker": "views/background.js"
   },
   "action": {},
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "storage", "clipboardWrite"],
   "content_scripts": [
     {
       "matches": ["https://region02eu5.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "http://app.norless.com/*", "http://app-ua.norless.com/*"],
