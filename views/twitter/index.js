@@ -4,7 +4,6 @@ document.body.addEventListener("contextmenu", e => {
 
   const displayMode = localStorage.getItem("displayMode");
 
-  console.info("displayMode", displayMode);
   const menu = getContextMenu([
     {
       text: "Distraction free mode",
