@@ -11,12 +11,12 @@
   "permissions": ["activeTab", "storage", "clipboardWrite"],
   "content_scripts": [
     {
-      "matches": ["https://region02eu5.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "http://app.norless.com/*", "http://app-ua.norless.com/*"],
+      "matches": ["https://*.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "http://*.norless.com/*"],
       "js": ["views/common/utilities.js", "views/common/tooltip/tooltip.js"],
       "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css"]
     },
     {
-      "matches": ["https://region02eu5.fusionsolar.huawei.com/*"],
+      "matches": ["https://*.fusionsolar.huawei.com/*"],
       "js": ["views/fusionsolar.huawei/index.js"],
       "css": ["views/fusionsolar.huawei/overrides.css"]
     },
@@ -26,11 +26,11 @@
       "css": ["views/twitter/overrides.css"]
     },
     {
-      "matches": ["http://app.norless.com/*", "http://app-ua.norless.com/*"],
+      "matches": ["http://*.norless.com/*"],
       "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/index.js"]
     },
     {
-      "matches": ["http://app.norless.com/template/output.html", "http://app-ua.norless.com/template/output.html"],
+      "matches": ["http://*.norless.com/template/output.html"],
       "css": ["views/norless/output-overrides.css"]
     },
     {
@@ -40,8 +40,8 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["views/norless/3168883-1-1.jpg"],
-      "matches": ["http://app.norless.com/*", "http://app-ua.norless.com/*"]
+      "resources": ["views/norless/sky-with-triangles-1-1.jpg"],
+      "matches": ["http://*.norless.com/*"]
     }
   ],
   "icons": {
