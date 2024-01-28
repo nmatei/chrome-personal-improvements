@@ -1,4 +1,20 @@
-initEvents();
+const backgroundImgOpacity = "backgroundImgOpacity";
+
+const backgroundImageOpacityItem = {
+  text: "background opacity",
+  icon: "⬛",
+  itemId: "backgroundImgOpacity",
+  handler: () => {
+    const oldOpacity = getBackgroundImgOpacity();
+    const opacity = prompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
+    setBackgroundImageOpacity(opacity);
+    // TODO update output page in case we changed from main screen
+  }
+};
+
+function getBackgroundImgOpacity() {
+  return localStorage.getItem(backgroundImgOpacity) || "0";
+}
 
 async function initEvents() {
   if (window.location.pathname === "/template/output.html") {
@@ -12,6 +28,8 @@ async function initEvents() {
     );
     const backgroundMode = localStorage.getItem("backgroundMode");
     toggleBackgroundMode(backgroundMode);
+    const opacity = getBackgroundImgOpacity();
+    setBackgroundImageOpacity(opacity);
   } else {
     const playlist = await waitElement("#playlist");
     playlist &&
@@ -37,7 +55,8 @@ function showOutputContextMenu(e) {
       handler: () => {
         toggleBackgroundMode("background-image");
       }
-    }
+    },
+    backgroundImageOpacityItem
   ]);
   showByCursor(menu, e);
 }
@@ -47,6 +66,18 @@ function toggleBackgroundMode(cls) {
     const toggle = document.body.classList.toggle(cls);
     localStorage.setItem("backgroundMode", toggle ? cls : "");
   }
+}
+
+function setBackgroundImageOpacity(opacity) {
+  opacity = parseInt(opacity) || 0;
+  if (opacity < 0) {
+    opacity = 0;
+  } else if (opacity > 100) {
+    opacity = 100;
+  }
+  localStorage.setItem(backgroundImgOpacity, opacity + "");
+  const root = $(":root");
+  root.style.setProperty("--" + backgroundImgOpacity, opacity / 100 + "");
 }
 
 function showContextMenu(e) {
@@ -69,7 +100,10 @@ function showContextMenu(e) {
       handler: async target => {
         await copyPlaylist(target);
       }
-    }
+    },
+    backgroundImageOpacityItem
   ]);
   showByCursor(menu, e);
 }
+
+initEvents();
