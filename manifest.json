@@ -13,7 +13,8 @@
     {
       "matches": ["https://*.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "http://*.norless.com/*"],
       "js": ["views/common/utilities.js", "views/common/tooltip/tooltip.js"],
-      "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css"]
+      "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css"],
+      "run_at": "document_end"
     },
     {
       "matches": ["https://*.fusionsolar.huawei.com/*"],
