@@ -1,5 +1,8 @@
-function $(selector, parent) {
-  return (parent || document).querySelector(selector);
+function $(selector, parentOrText) {
+  if (typeof parentOrText === "string") {
+    return $$(selector).find(el => el.innerText === parentOrText);
+  }
+  return (parentOrText || document).querySelector(selector);
 }
 
 function $$(selector, parent) {
