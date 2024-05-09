@@ -41,7 +41,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["views/norless/sky-with-triangles-1-1.jpg"],
+      "resources": ["views/norless/background.jpg"],
       "matches": ["http://*.norless.com/*"]
     }
   ],
