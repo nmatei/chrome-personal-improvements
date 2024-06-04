@@ -32,8 +32,7 @@ function showBy(el, target, offsets = [0, 0], align = "bottom") {
   } else {
     top += bounds.height;
   }
-  el.style.left = left + offsets[0] + "px";
-  el.style.top = top + offsets[1] + "px";
+  setPosition(el, left + offsets[0], top + offsets[1]);
 }
 
 function createContextMenu(id = "context-menu") {

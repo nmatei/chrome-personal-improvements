@@ -167,3 +167,9 @@
   border-bottom: 4px solid transparent;
   border-right: 4px solid #ffffff;
 }
+
+@media print {
+  .context-menu {
+    display: none;
+  }
+}
