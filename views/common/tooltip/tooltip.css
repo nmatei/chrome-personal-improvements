@@ -170,6 +170,6 @@
 
 @media print {
   .context-menu {
-    display: none;
+    display: none !important;
   }
 }
