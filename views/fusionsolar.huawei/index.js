@@ -1,5 +1,5 @@
 document.body.addEventListener("contextmenu", e => {
-  const content = e.target.closest(".col-content");
+  const content = e.target.closest(".col-content") || e.target.closest(".card");
   if (content) {
     e.stopPropagation();
     e.preventDefault();
