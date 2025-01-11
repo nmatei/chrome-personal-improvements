@@ -13,7 +13,7 @@ async function copyPlaylist(target) {
   //  when have <span class="text"></span> inside
   //  - try to render html inside iframe and read text from there
   //const body = mapBody(target, '');
-  const html = getPlaylistDoc(target, "🎵 ", false);
+  const html = getPlaylistDoc(target, "📌 ", false);
   const body = await getInnerToClipboard(html);
   copyToClipboard(body);
 }

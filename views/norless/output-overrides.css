@@ -1,10 +1,24 @@
 :root {
   --backgroundImgOpacity: 0;
+  --pageBackgroundColor: #000000;
 }
 
 html {
   height: 100%;
 }
+body {
+  background: var(--pageBackgroundColor) !important;
+}
+#holder_info,
+#clock_info,
+#holder_next_line {
+  color: #ffffff88 !important;
+}
+
+#holder_text {
+  padding: 0 15px;
+}
+
 body.background-image {
   height: 100%;
   background-size: cover !important;

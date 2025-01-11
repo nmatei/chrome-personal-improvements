@@ -1,17 +1,33 @@
 const backgroundImgOpacity = "backgroundImgOpacity";
+const pageBackgroundColor = "pageBackgroundColor";
 
-const backgroundImageOpacityItem = {
-  text: "background opacity",
-  icon: "⬛",
-  itemId: "backgroundImgOpacity",
-  handler: () => {
-    const oldOpacity = getBackgroundImgOpacity();
-    const opacity = prompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
-    setBackgroundImageOpacity(opacity);
-    // TODO update output page in case we changed from main screen
+const changeBackgroundItems = [
+  {
+    text: "background color",
+    icon: "🎨",
+    itemId: "pageBackgroundColor",
+    handler: () => {
+      const oldColor = getPageBackgroundColor();
+      const color = prompt("set background color (eg. #82663a)", oldColor);
+      setPageBackgroundColor(color);
+    }
+  },
+  {
+    text: "background opacity",
+    icon: "⬛",
+    itemId: "backgroundImgOpacity",
+    handler: () => {
+      const oldOpacity = getBackgroundImgOpacity();
+      const opacity = prompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
+      setBackgroundImageOpacity(opacity);
+      // TODO update output page in case we changed from main screen
+    }
   }
-};
+];
 
+function getPageBackgroundColor() {
+  return localStorage.getItem(pageBackgroundColor) || "#000000";
+}
 function getBackgroundImgOpacity() {
   return localStorage.getItem(backgroundImgOpacity) || "0";
 }
@@ -30,6 +46,9 @@ async function initEvents() {
     toggleBackgroundMode(backgroundMode);
     const opacity = getBackgroundImgOpacity();
     setBackgroundImageOpacity(opacity);
+
+    const pageBackgroundColor = getPageBackgroundColor();
+    setPageBackgroundColor(pageBackgroundColor);
   } else {
     const playlist = await waitElement("#playlist");
     playlist &&
@@ -56,7 +75,7 @@ function showOutputContextMenu(e) {
         toggleBackgroundMode("background-image");
       }
     },
-    backgroundImageOpacityItem
+    ...changeBackgroundItems
   ]);
   showByCursor(menu, e);
 }
@@ -66,6 +85,12 @@ function toggleBackgroundMode(cls) {
     const toggle = document.body.classList.toggle(cls);
     localStorage.setItem("backgroundMode", toggle ? cls : "");
   }
+}
+
+function setPageBackgroundColor(color) {
+  localStorage.setItem(pageBackgroundColor, color);
+  const root = $(":root");
+  root.style.setProperty("--" + pageBackgroundColor, color);
 }
 
 function setBackgroundImageOpacity(opacity) {
@@ -101,7 +126,7 @@ function showContextMenu(e) {
         await copyPlaylist(target);
       }
     },
-    backgroundImageOpacityItem
+    ...changeBackgroundItems
   ]);
   showByCursor(menu, e);
 }
