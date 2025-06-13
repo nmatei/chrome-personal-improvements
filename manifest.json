@@ -37,12 +37,20 @@
     {
       "matches": ["https://eu.salusconnect.io/*", "https://qa.eu.salusconnect.io/*"],
       "css": ["views/salusconnect/overrides.css"]
+    },
+    {
+      "matches": ["https://eu.uat-cloud.trados.com/lc/t/*"],
+      "css": ["views/trados/overrides.css"]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": ["views/norless/background.jpg"],
       "matches": ["http://*.norless.com/*"]
+    },
+    {
+      "resources": ["views/trados/tradosblack.webp"],
+      "matches": ["https://*.trados.com/*"]
     }
   ],
   "icons": {

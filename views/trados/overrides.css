@@ -1,0 +1,11 @@
+/* Alternative approach - replace the image directly */
+.sdl-navbar img.x-img {
+  visibility: hidden !important; /* Hide the original image without affecting layout */
+  position: relative !important;
+
+  content: url("chrome-extension://__MSG_@@extension_id__/views/trados/tradosblack.webp") !important;
+  visibility: visible !important;
+  width: 106px !important; /* Set exact width to match original */
+  height: 46px !important; /* Set exact height to match original */
+  object-fit: contain !important; /* Maintain aspect ratio */
+}
