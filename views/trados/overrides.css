@@ -9,3 +9,65 @@
   height: 46px !important; /* Set exact height to match original */
   object-fit: contain !important; /* Maintain aspect ratio */
 }
+
+body .tenant-picker-toolbar {
+  background-color: #fff;
+}
+body .sdl-navbar.x-toolbar {
+  background-color: #fff;
+  border-bottom: 1px solid #d8d9dc !important;
+}
+body .sdl-navbar .x-btn-default-medium {
+  background-color: #fff;
+}
+body .sdl-navbar .x-btn.x-btn-menu-active.x-btn-default-medium,
+body .sdl-navbar .x-btn.x-btn-pressed.x-btn-default-medium {
+  background-color: #dcd3f5;
+}
+
+body .copilot-icon-small {
+  /* background-image: url("https://eu.uat-cloud.trados.com/classic/resources/images/icons/copilot-icon-menu.svg"); */
+  filter: brightness(0) saturate(100%); /* Convert to black */
+}
+
+body .copilot-icon-small:hover {
+  /* Remove the filter on hover to show original color */
+  filter: none;
+}
+
+body .x-btn-inner-default-small,
+body .x-btn-inner-default-medium {
+  color: #000;
+}
+body .x-btn-icon-el-default-medium {
+  color: #000;
+}
+body .sdl-navbar .x-toolbar-text-default {
+  color: #000;
+}
+
+:root {
+  --baseColorComponent: #8254f6 !important;
+}
+
+body .x-menu-item-default.x-menu-item-focus,
+body .x-menu-item-default.x-menu-item-active {
+  background-color: var(--baseColor) !important;
+  color: #000 !important;
+}
+
+/* Make menu item text black when active/focused */
+body .x-menu-item-focus .x-menu-item-text-default,
+body .x-menu-item-active .x-menu-item-text-default {
+  color: #000 !important; /* Override white color with black */
+}
+
+/* Make menu item icons black when active/focused */
+body .x-menu-item-focus .x-menu-item-icon-default,
+body .x-menu-item-active .x-menu-item-icon-default {
+  color: #000 !important; /* Override white color with black */
+}
+
+body .action-link {
+  color: #120083;
+}
