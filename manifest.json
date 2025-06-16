@@ -43,7 +43,17 @@
       "css": ["views/trados/overrides.css"]
     },
     {
-      "matches": ["https://*.uat-cloud.trados.com/cp/*", "https://*.cloud.trados.com/cp/*", "https://staging-languagecloud.sdl.com/cp/*"],
+      "matches": [
+        "https://*.uat-cloud.trados.com/cp/*",
+        "https://*.uat-cloud.trados.com/en/cp/*",
+        "https://*.cloud.trados.com/cp/*",
+        "https://*.cloud.trados.com/en/cp/*",
+        "https://staging-languagecloud.sdl.com/cp/*",
+        "https://staging-languagecloud.sdl.com/en/cp/*",
+        "https://*.uat-cloud.trados.com/en/managed-translation",
+        "https://*.cloud.trados.com/en/managed-translation",
+        "https://staging-languagecloud.sdl.com/en/managed-translation/*"
+      ],
       "css": ["views/trados/cp/overrides.css"]
     }
   ],

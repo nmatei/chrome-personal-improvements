@@ -1,0 +1,82 @@
+body header:not(.unstyled) {
+  background-color: #fff;
+}
+
+body .navbar-nav.navbar-right {
+  background: #fff;
+}
+
+body .navbar-default .navbar-nav > .active > a,
+body .navbar-default .navbar-nav > .active > a:focus,
+body .navbar-default .navbar-nav > .active > a:hover,
+body .navbar-default .navbar-nav > li > a:focus,
+body .navbar-default .navbar-nav > li > a:hover {
+  background: #dcd3f5;
+  color: #000;
+}
+
+body .navbar-default .navbar-nav > li > a {
+  color: #000;
+}
+
+body #mt-nav-scope > a > [class*="icon"]:after {
+  box-shadow: 0 0 0 2px #fff;
+  background: #000;
+}
+
+body #mt-nav-scope.open > a:focus > [class*="icon"]:after,
+body #mt-nav-scope.open > a:hover > [class*="icon"]:after,
+body #mt-nav-scope.open > a > [class*="icon"]:after,
+body #mt-nav-scope > a:focus > [class*="icon"]:after,
+body #mt-nav-scope > a:hover > [class*="icon"]:after {
+  box-shadow: 0 0 0 2px #dcd3f5;
+  background: #000;
+}
+
+body .navbar-nav.navbar-right > li:not(.is-text) .navbar-icon-button:focus,
+body .navbar-nav.navbar-right > li:not(.is-text) .navbar-icon-button:hover,
+body .navbar-nav.navbar-right > li:not(.is-text) > a:focus,
+body .navbar-nav.navbar-right > li:not(.is-text) > a:hover {
+  background: #dcd3f5;
+  color: #000;
+}
+
+body .navbar-collapse.collapse .navbar-left:after {
+  background: none;
+}
+
+body #mt-nav-logo-img {
+  content: url("chrome-extension://__MSG_@@extension_id__/views/trados/tradosblack.webp") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  width: 106px !important; /* Set exact width to match original */
+  height: 46px !important; /* Set exact height to match original */
+  object-fit: contain !important; /* Maintain aspect ratio */
+}
+
+body .navbar-nav.navbar-right > li:not(.is-text) .navbar-icon-button,
+body .navbar-nav.navbar-right > li:not(.is-text) > a {
+  color: #000;
+}
+
+body .btn-primary,
+body .btn-cta {
+  background: #dcd3f5;
+  color: #000;
+}
+
+body .btn-primary:active,
+body .btn-primary:hover,
+body .btn-primary:focus,
+body .btn-cta:active,
+body .btn-cta:focus,
+body .btn-cta:hover {
+  background: #c4b8e4;
+  color: #000;
+}
+
+body .dropdown-menu > li > a:focus,
+body .dropdown-menu > li > a:hover {
+  background: #dcd3f5;
+  color: #000;
+}
