@@ -40,6 +40,7 @@
     },
     {
       "matches": ["https://*.uat-cloud.trados.com/lc/*", "https://*.cloud.trados.com/lc/*", "https://staging-languagecloud.sdl.com/lc/*"],
+      "js": ["views/trados/index.js"],
       "css": ["views/trados/overrides.css"]
     },
     {
@@ -54,6 +55,7 @@
         "https://*.cloud.trados.com/en/managed-translation",
         "https://staging-languagecloud.sdl.com/en/managed-translation/*"
       ],
+      "js": ["views/trados/index.js"],
       "css": ["views/trados/cp/overrides.css"]
     }
   ],
@@ -63,7 +65,7 @@
       "matches": ["http://*.norless.com/*"]
     },
     {
-      "resources": ["views/trados/tradosblack.webp"],
+      "resources": ["views/trados/tradosblack.webp", "views/trados/icons/*"],
       "matches": ["https://*.trados.com/*", "https://*.sdl.com/*"]
     }
   ],
