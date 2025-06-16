@@ -1,14 +1,32 @@
 /* Alternative approach - replace the image directly */
 .sdl-navbar img.x-img {
-  visibility: hidden !important; /* Hide the original image without affecting layout */
+  /*visibility: hidden !important; !* Hide the original image without affecting layout *!*/
   position: relative !important;
-
   content: url("chrome-extension://__MSG_@@extension_id__/views/trados/tradosblack.webp") !important;
   visibility: visible !important;
   width: 106px !important; /* Set exact width to match original */
   height: 46px !important; /* Set exact height to match original */
   object-fit: contain !important; /* Maintain aspect ratio */
 }
+
+/* select-account */
+body .sdl-topbar .topbar-logo {
+  /*background-image: url("chrome-extension://__MSG_@@extension_id__/views/trados/tradosblack.webp") !important;*/
+  content: url("chrome-extension://__MSG_@@extension_id__/views/trados/tradosblack.webp") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  width: 106px !important; /* Set exact width to match original */
+  height: 46px !important; /* Set exact height to match original */
+}
+body .sdl-topbar {
+  background-color: #fff;
+  color: #000;
+}
+body .bg-btn.lc-primary.ui-button {
+  color: #000;
+}
+
+/* main page */
 
 body .tenant-picker-toolbar {
   background-color: #fff;
@@ -47,7 +65,11 @@ body .sdl-navbar .x-toolbar-text-default {
 }
 
 :root {
+  --baseColor: #dcd3f5 !important; /* can be changed in from UI as well */
+  --baseColorOver: #c4b8e4 !important; /* can be changed in from UI as well */
   --baseColorComponent: #8254f6 !important;
+  --baseColorGridOver: #dcd3f5 !important;
+  --baseColorGridSelected: #dcd3f5 !important;
 }
 
 body .x-menu-item-default.x-menu-item-focus,

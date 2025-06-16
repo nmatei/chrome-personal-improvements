@@ -39,8 +39,12 @@
       "css": ["views/salusconnect/overrides.css"]
     },
     {
-      "matches": ["https://eu.uat-cloud.trados.com/lc/t/*"],
+      "matches": ["https://*.uat-cloud.trados.com/lc/*", "https://*.cloud.trados.com/lc/*", "https://staging-languagecloud.sdl.com/lc/*"],
       "css": ["views/trados/overrides.css"]
+    },
+    {
+      "matches": ["https://*.uat-cloud.trados.com/cp/*", "https://*.cloud.trados.com/cp/*", "https://staging-languagecloud.sdl.com/cp/*"],
+      "css": ["views/trados/cp/overrides.css"]
     }
   ],
   "web_accessible_resources": [
@@ -50,7 +54,7 @@
     },
     {
       "resources": ["views/trados/tradosblack.webp"],
-      "matches": ["https://*.trados.com/*"]
+      "matches": ["https://*.trados.com/*", "https://*.sdl.com/*"]
     }
   ],
   "icons": {
