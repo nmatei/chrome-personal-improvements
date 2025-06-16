@@ -63,13 +63,19 @@ body .x-btn-icon-el-default-medium {
 body .sdl-navbar .x-toolbar-text-default {
   color: #000;
 }
+body .x-btn-over.x-btn-secondary-medium .x-btn-inner {
+  color: #000;
+}
 
 :root {
   --baseColor: #dcd3f5 !important; /* can be changed in from UI as well */
   --baseColorOver: #c4b8e4 !important; /* can be changed in from UI as well */
+  --baseColorDisabled: #ede9fa !important;
   --baseColorComponent: #8254f6 !important;
   --baseColorGridOver: #dcd3f5 !important;
   --baseColorGridSelected: #dcd3f5 !important;
+  --baseColorGridBorderHover: #f8f0f5 !important;
+  --baseColorGridSelectedBorder: #f9f1f6 !important;
 }
 
 body .x-menu-item-default.x-menu-item-focus,
