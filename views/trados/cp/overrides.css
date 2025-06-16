@@ -6,6 +6,10 @@ body .navbar-nav.navbar-right {
   background: #fff;
 }
 
+body header.minimal #mt-nav-title {
+  color: #000;
+}
+
 body .navbar-default .navbar-nav > .active > a,
 body .navbar-default .navbar-nav > .active > a:focus,
 body .navbar-default .navbar-nav > .active > a:hover,
@@ -152,4 +156,10 @@ body .text-primary {
 body .table.dataTable.table-hover > tbody > tr:not(.has-overlay):hover,
 body .table.table-hover > tbody > tr:not(.has-overlay):hover {
   background-color: #dcd3f5;
+}
+
+body .checkbox input[type="checkbox"]:checked + input[type="hidden"] + label:before,
+body .checkbox input[type="checkbox"]:checked + label:before {
+  background-color: #8254f6;
+  border-color: #8254f6;
 }
