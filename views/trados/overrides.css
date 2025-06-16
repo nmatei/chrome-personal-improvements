@@ -28,6 +28,10 @@ body .bg-btn.lc-primary.ui-button {
 
 /* main page */
 
+body .x-window-header-title-fullscreen {
+  color: #000;
+}
+
 body .tenant-picker-toolbar {
   background-color: #fff;
 }

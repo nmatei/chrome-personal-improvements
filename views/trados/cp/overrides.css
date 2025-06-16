@@ -75,8 +75,81 @@ body .btn-cta:hover {
   color: #000;
 }
 
+body .btn-inverted {
+  background-color: #fff;
+  color: #8254f6;
+}
+
+body .btn-inverted:active,
+.btn-inverted:focus,
+.btn-inverted:hover {
+  background-color: #dfe6e9;
+  color: #8254f6;
+}
+
+body .btn-inverted.disabled,
+.btn-inverted[disabled],
+fieldset[disabled] .btn-inverted {
+  background-color: #fff;
+}
+
+.btn-primary.disabled.focus,
+.btn-primary.disabled:focus,
+.btn-primary.disabled:hover,
+.btn-primary[disabled].focus,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary.focus,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary:hover {
+  background-color: #dcd3f5;
+  border-color: #006667;
+}
+
 body .dropdown-menu > li > a:focus,
 body .dropdown-menu > li > a:hover {
   background: #dcd3f5;
   color: #000;
+}
+
+body .table tr.row-highlight,
+body .table.dataTable tr.row-highlight {
+  background-color: #dcd3f5 !important;
+  outline: solid 2px #8254f6;
+  outline-offset: -2px;
+}
+
+body table.dataTable > tbody > tr.selected > td.select-checkbox:before,
+body table.dataTable > tbody > tr.selected > th.allow-select.select-checkbox:before,
+body table.dataTable > thead > tr.selected > td.select-checkbox:before,
+body table.dataTable > thead > tr.selected > th.allow-select.select-checkbox:before {
+  background-color: #8254f6;
+  border-color: #8254f6;
+}
+
+body .nav-tabs > li.active > a,
+body .nav-tabs > li.active > a:focus,
+body .nav-tabs > li.active > a:hover {
+  color: #8254f6;
+  background: 0 0;
+  border: 0;
+  border-bottom: 3px solid #8254f6;
+}
+
+body .navbar-icon-button {
+  color: #999;
+}
+body .navbar-icon-button:focus,
+body .navbar-icon-button:hover {
+  color: #fff;
+  background-color: #999;
+}
+
+body .text-primary {
+  color: #8254f6;
+}
+
+body .table.dataTable.table-hover > tbody > tr:not(.has-overlay):hover,
+body .table.table-hover > tbody > tr:not(.has-overlay):hover {
+  background-color: #dcd3f5;
 }
