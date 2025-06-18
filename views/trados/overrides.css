@@ -61,6 +61,21 @@ body .sdl-navbar .x-btn.x-btn-pressed.x-btn-default-medium {
   background-color: #dcd3f5;
 }
 
+body .x-btn-secondary-nav-medium {
+  border-color: var(--baseColorComponent);
+}
+body .x-btn-icon-el-secondary-nav-medium,
+body .x-btn-inner-secondary-nav-medium {
+  color: var(--baseColorComponent);
+}
+body .x-btn-over.x-btn-secondary-nav-medium {
+  border-color: var(--baseColorComponent);
+  background-color: var(--baseColorOver);
+}
+body .x-btn-over.x-btn-secondary-nav-medium .x-btn-inner {
+  color: var(--textColor) !important;
+}
+
 body .copilot-icon-small {
   /* background-image: url("https://eu.uat-cloud.trados.com/classic/resources/images/icons/copilot-icon-menu.svg"); */
   filter: brightness(0) saturate(100%); /* Convert to black */
