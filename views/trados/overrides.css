@@ -1,3 +1,16 @@
+:root {
+  --baseColor: #dcd3f5 !important; /* can be changed in from UI as well */
+  --baseColorOver: #c4b8e4 !important; /* can be changed in from UI as well */
+  --baseColorDisabled: #ede9fa !important;
+  --baseColorComponent: #8254f6 !important;
+  --baseColorGridOver: #dcd3f5 !important;
+  --baseColorGridSelected: #dcd3f5 !important;
+  --baseColorGridBorderHover: #f8f0f5 !important;
+  --baseColorGridSelectedBorder: #f9f1f6 !important;
+  /* New */
+  --textColor: #000 !important; /* Override text color to black */
+}
+
 /* Alternative approach - replace the image directly */
 .sdl-navbar img.x-img {
   /*visibility: hidden !important; !* Hide the original image without affecting layout *!*/
@@ -18,18 +31,19 @@ body .sdl-topbar .topbar-logo {
   width: 106px !important; /* Set exact width to match original */
   height: 46px !important; /* Set exact height to match original */
 }
+
 body .sdl-topbar {
   background-color: #fff;
-  color: #000;
+  color: var(--textColor);
 }
 body .bg-btn.lc-primary.ui-button {
-  color: #000;
+  color: var(--textColor);
 }
 
 /* main page */
 
 body .x-window-header-title-fullscreen {
-  color: #000;
+  color: var(--textColor);
 }
 
 body .tenant-picker-toolbar {
@@ -59,47 +73,47 @@ body .copilot-icon-small:hover {
 
 body .x-btn-inner-default-small,
 body .x-btn-inner-default-medium {
-  color: #000;
+  color: var(--textColor);
 }
 body .x-btn-icon-el-default-medium {
-  color: #000;
+  color: var(--textColor);
 }
 body .sdl-navbar .x-toolbar-text-default {
-  color: #000;
+  color: var(--textColor);
 }
 body .x-btn-over.x-btn-secondary-medium .x-btn-inner {
-  color: #000;
-}
-
-:root {
-  --baseColor: #dcd3f5 !important; /* can be changed in from UI as well */
-  --baseColorOver: #c4b8e4 !important; /* can be changed in from UI as well */
-  --baseColorDisabled: #ede9fa !important;
-  --baseColorComponent: #8254f6 !important;
-  --baseColorGridOver: #dcd3f5 !important;
-  --baseColorGridSelected: #dcd3f5 !important;
-  --baseColorGridBorderHover: #f8f0f5 !important;
-  --baseColorGridSelectedBorder: #f9f1f6 !important;
+  color: var(--textColor);
 }
 
 body .x-menu-item-default.x-menu-item-focus,
 body .x-menu-item-default.x-menu-item-active {
   background-color: var(--baseColor) !important;
-  color: #000 !important;
+  color: var(--textColor) !important;
 }
 
 /* Make menu item text black when active/focused */
 body .x-menu-item-focus .x-menu-item-text-default,
 body .x-menu-item-active .x-menu-item-text-default {
-  color: #000 !important; /* Override white color with black */
+  color: var(--textColor) !important; /* Override white color with black */
 }
 
 /* Make menu item icons black when active/focused */
 body .x-menu-item-focus .x-menu-item-icon-default,
 body .x-menu-item-active .x-menu-item-icon-default {
-  color: #000 !important; /* Override white color with black */
+  color: var(--textColor) !important; /* Override white color with black */
 }
 
 body .action-link {
   color: #120083;
+}
+
+/* online editor fixes */
+.editor-title span img {
+  max-width: 400px;
+  max-height: 400px;
+  vertical-align: middle;
+}
+.editor-wrap .editor-title span img {
+  max-width: 200px;
+  max-height: 200px;
 }

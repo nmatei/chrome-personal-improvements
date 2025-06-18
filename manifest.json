@@ -39,7 +39,12 @@
       "css": ["views/salusconnect/overrides.css"]
     },
     {
-      "matches": ["https://*.uat-cloud.trados.com/lc/*", "https://*.cloud.trados.com/lc/*", "https://staging-languagecloud.sdl.com/lc/*"],
+      "matches": [
+        "https://*.uat-cloud.trados.com/lc/*",
+        "https://*.cloud.trados.com/lc/*",
+        "https://staging-languagecloud.sdl.com/lc/*",
+        "https://local-languagecloud.sdl.com/lc/*"
+      ],
       "js": ["views/trados/index.js"],
       "css": ["views/trados/overrides.css"]
     },
