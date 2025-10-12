@@ -38,7 +38,7 @@ async function initEvents() {
       "contextmenu",
       function (e) {
         // Allow native Chrome context menu (for Cast, etc.) when CTRL is pressed
-        if (!e.ctrlKey) {
+        if (e.ctrlKey) {
           e.preventDefault();
           showOutputContextMenu(e);
         }
@@ -59,7 +59,7 @@ async function initEvents() {
         "contextmenu",
         function (e) {
           // Allow native Chrome context menu when CTRL is pressed
-          if (!e.ctrlKey) {
+          if (e.ctrlKey) {
             e.preventDefault();
             showContextMenu(e);
           }
