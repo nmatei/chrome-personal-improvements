@@ -37,8 +37,11 @@ async function initEvents() {
     document.body.addEventListener(
       "contextmenu",
       function (e) {
-        e.preventDefault();
-        showOutputContextMenu(e);
+        // Allow native Chrome context menu (for Cast, etc.) when CTRL is pressed
+        if (!e.ctrlKey) {
+          e.preventDefault();
+          showOutputContextMenu(e);
+        }
       },
       false
     );
@@ -55,8 +58,11 @@ async function initEvents() {
       playlist.addEventListener(
         "contextmenu",
         function (e) {
-          e.preventDefault();
-          showContextMenu(e);
+          // Allow native Chrome context menu when CTRL is pressed
+          if (!e.ctrlKey) {
+            e.preventDefault();
+            showContextMenu(e);
+          }
         },
         false
       );
