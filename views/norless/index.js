@@ -1,29 +1,79 @@
 const backgroundImgOpacity = "backgroundImgOpacity";
 const pageBackgroundColor = "pageBackgroundColor";
 
-const changeBackgroundItems = [
-  {
-    text: "background color",
-    icon: "🎨",
-    itemId: "pageBackgroundColor",
-    handler: () => {
-      const oldColor = getPageBackgroundColor();
-      const color = prompt("set background color (eg. #82663a)", oldColor);
-      setPageBackgroundColor(color);
-    }
-  },
-  {
-    text: "background opacity",
-    icon: "⬛",
-    itemId: "backgroundImgOpacity",
-    handler: () => {
-      const oldOpacity = getBackgroundImgOpacity();
-      const opacity = prompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
-      setBackgroundImageOpacity(opacity);
-      // TODO update output page in case we changed from main screen
-    }
+// TODO import simple Prompt from [Project verses from bible.com]
+
+function getProjectTextSettings() {
+  const saved = localStorage.getItem("projectTextSettings");
+  if (saved) {
+    return JSON.parse(saved);
   }
-];
+  return {
+    extensionId: "fklnkmnlobkpoiifnbnemdpamheoanpj", // production ID
+    window: "0" // 0 = disabled, 1 = window 1, 2 = window 2, 3 = both windows
+  };
+}
+
+function saveProjectTextSettings(settings) {
+  localStorage.setItem("projectTextSettings", JSON.stringify(settings));
+}
+
+function getCommonMenuItems() {
+  const projectSettings = getProjectTextSettings();
+  const isEnabled = projectSettings.window !== "0";
+
+  return [
+    {
+      text: "background color",
+      icon: "🎨",
+      itemId: "pageBackgroundColor",
+      handler: () => {
+        const oldColor = getPageBackgroundColor();
+        const color = prompt("set background color (eg. #82663a)", oldColor);
+        setPageBackgroundColor(color);
+      }
+    },
+    {
+      text: "background opacity",
+      icon: "⬛",
+      itemId: "backgroundImgOpacity",
+      handler: () => {
+        const oldOpacity = getBackgroundImgOpacity();
+        const opacity = prompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
+        setBackgroundImageOpacity(opacity);
+        // TODO update output page in case we changed from main screen
+      }
+    },
+    {
+      text: "Project text on [Project verses from bible.com]",
+      rightIcon: isEnabled ? "✅" : "☐",
+      icon: "📤",
+      itemId: "projectText",
+      handler: async () => {
+        const currentSettings = getProjectTextSettings();
+        const EXTENSION_ID = await simplePrompt("Sync with EXTENSION_ID for [Project verses from bible.com]!", currentSettings.extensionId);
+
+        let windowChoice;
+        let isValid = false;
+        while (!isValid) {
+          windowChoice = await simplePrompt("Which window to project to? (0=none, 1=window1, 2=window2, 3=both)", currentSettings.window);
+          if (["0", "1", "2", "3"].includes(windowChoice)) {
+            isValid = true;
+          } else {
+            simpleAlert("Invalid value! Please enter 0, 1, 2, or 3");
+          }
+        }
+
+        const newSettings = {
+          extensionId: EXTENSION_ID,
+          window: windowChoice
+        };
+
+        saveProjectTextSettings(newSettings);
+      }
+    }
+  ];
+}
 
 function getPageBackgroundColor() {
   return localStorage.getItem(pageBackgroundColor) || "#000000";
@@ -81,7 +131,7 @@ function showOutputContextMenu(e) {
         toggleBackgroundMode("background-image");
       }
     },
-    ...changeBackgroundItems
+    ...getCommonMenuItems()
   ]);
   showByCursor(menu, e);
 }
@@ -132,7 +182,7 @@ function showContextMenu(e) {
         await copyPlaylist(target);
       }
     },
-    ...changeBackgroundItems
+    ...getCommonMenuItems()
   ]);
   showByCursor(menu, e);
 }
