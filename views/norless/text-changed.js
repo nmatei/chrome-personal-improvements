@@ -4,15 +4,14 @@ function getProjectIndexes() {
   const settings = getProjectTextSettings();
   const windowValue = settings.window;
 
-  if (windowValue === 0) {
-    return []; // disabled, don't project
-  } else if (windowValue === 1) {
+  if (windowValue === 1) {
     return [1];
   } else if (windowValue === 2) {
     return [2];
   } else if (windowValue === 3) {
     return [undefined]; // undefined projects to both windows
   }
+  // 0 = disabled, don't project
   return [];
 }
 

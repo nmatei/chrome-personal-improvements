@@ -47,22 +47,22 @@ function getCommonMenuItems(e) {
       icon: "📤",
       itemId: "projectText",
       handler: async () => {
-        const projectSettings = getProjectTextSettings();
+        const settings = getProjectTextSettings();
 
         const menu = getContextMenu(
           [
             `Select window to project to:`,
             "-",
-            ...getProjectWindowsSelectionMenu(projectSettings.window),
+            ...getProjectWindowsSelectionMenu(settings.window),
             "-",
             {
               text: "Configure EXTENSION_ID",
               icon: "⚙️",
               itemId: "configureExtensionId",
               handler: async () => {
-                const EXTENSION_ID = await simplePrompt("Sync with EXTENSION_ID for [Project verses from bible.com]!", projectSettings.extensionId);
+                const EXTENSION_ID = await simplePrompt("Sync with EXTENSION_ID for [Project verses from bible.com]!", settings.extensionId);
                 saveProjectTextSettings({
-                  ...projectSettings,
+                  ...settings,
                   extensionId: EXTENSION_ID
                 });
               }
@@ -86,9 +86,8 @@ function getProjectWindowsSelectionMenu(win) {
   };
 
   async function handler(el, item) {
-    const currentSettings = getProjectTextSettings();
-    const newState = item.data.state;
-    saveProjectTextSettings({ ...currentSettings, window: newState });
+    const settings = getProjectTextSettings();
+    saveProjectTextSettings({ ...settings, window: item.data.state });
   }
 
   return [0, 1, 2, 3].map(n => {
