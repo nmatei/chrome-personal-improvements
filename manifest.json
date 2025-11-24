@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "http://*.norless.com/*"],
-      "js": ["views/common/utilities.js", "views/common/tooltip/tooltip.js", "views/common/simplePrompt/simplePrompt.js"],
+      "js": ["views/icons/icons.js", "views/common/utilities.js", "views/common/tooltip/tooltip.js", "views/common/simplePrompt/simplePrompt.js"],
       "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css", "views/common/simplePrompt/simplePrompt.css"],
       "run_at": "document_end"
     },

@@ -10,7 +10,7 @@ function getProjectTextSettings() {
   }
   return {
     extensionId: "fklnkmnlobkpoiifnbnemdpamheoanpj", // production ID
-    window: "0" // 0 = disabled, 1 = window 1, 2 = window 2, 3 = both windows
+    window: 0 // 0 = disabled, 1 = window 1, 2 = window 2, 3 = both windows
   };
 }
 
@@ -18,10 +18,7 @@ function saveProjectTextSettings(settings) {
   localStorage.setItem("projectTextSettings", JSON.stringify(settings));
 }
 
-function getCommonMenuItems() {
-  const projectSettings = getProjectTextSettings();
-  const isEnabled = projectSettings.window !== "0";
-
+function getCommonMenuItems(e) {
   return [
     {
       text: "background color",
@@ -45,34 +42,67 @@ function getCommonMenuItems() {
       }
     },
     {
-      text: "Project text on [Project verses from bible.com]",
-      rightIcon: isEnabled ? "✅" : "☐",
+      text: "Project on [Project verses from bible.com]",
+      rightIcon: icons.rightArrow,
       icon: "📤",
       itemId: "projectText",
       handler: async () => {
-        const currentSettings = getProjectTextSettings();
-        const EXTENSION_ID = await simplePrompt("Sync with EXTENSION_ID for [Project verses from bible.com]!", currentSettings.extensionId);
+        const projectSettings = getProjectTextSettings();
 
-        let windowChoice;
-        let isValid = false;
-        while (!isValid) {
-          windowChoice = await simplePrompt("Which window to project to? (0=none, 1=window1, 2=window2, 3=both)", currentSettings.window);
-          if (["0", "1", "2", "3"].includes(windowChoice)) {
-            isValid = true;
-          } else {
-            simpleAlert("Invalid value! Please enter 0, 1, 2, or 3");
-          }
-        }
+        const menu = getContextMenu(
+          [
+            `Select window to project to:`,
+            "-",
+            ...getProjectWindowsSelectionMenu(projectSettings.window),
+            "-",
+            {
+              text: "Configure EXTENSION_ID",
+              icon: "⚙️",
+              itemId: "configureExtensionId",
+              handler: async () => {
+                const EXTENSION_ID = await simplePrompt("Sync with EXTENSION_ID for [Project verses from bible.com]!", projectSettings.extensionId);
+                saveProjectTextSettings({
+                  ...projectSettings,
+                  extensionId: EXTENSION_ID
+                });
+              }
+            }
+          ],
+          true
+        );
 
-        const newSettings = {
-          extensionId: EXTENSION_ID,
-          window: windowChoice
-        };
-
-        saveProjectTextSettings(newSettings);
+        showBy(menu, e.target);
       }
     }
   ];
+}
+
+function getProjectWindowsSelectionMenu(win) {
+  const text = {
+    0: "Disable projection",
+    1: "Project to window 1",
+    2: "Project to window 2",
+    3: "Project to both windows"
+  };
+
+  async function handler(el, item) {
+    const currentSettings = getProjectTextSettings();
+    const newState = item.data.state;
+    saveProjectTextSettings({ ...currentSettings, window: newState });
+  }
+
+  return [0, 1, 2, 3].map(n => {
+    return {
+      text: text[n],
+      icon: win === n ? icons.checked : icons.unchecked,
+      itemId: "projectWindow" + n,
+      data: {
+        state: n
+      },
+      active: win === n,
+      handler
+    };
+  });
 }
 
 function getPageBackgroundColor() {
@@ -131,7 +161,7 @@ function showOutputContextMenu(e) {
         toggleBackgroundMode("background-image");
       }
     },
-    ...getCommonMenuItems()
+    ...getCommonMenuItems(e)
   ]);
   showByCursor(menu, e);
 }
@@ -182,7 +212,7 @@ function showContextMenu(e) {
         await copyPlaylist(target);
       }
     },
-    ...getCommonMenuItems()
+    ...getCommonMenuItems(e)
   ]);
   showByCursor(menu, e);
 }
