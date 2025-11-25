@@ -1,4 +1,4 @@
-const target = document.getElementById("holder_text");
+const target = $("#holder_text");
 
 function getProjectIndexes() {
   const settings = getProjectTextSettings();
@@ -15,16 +15,35 @@ function getProjectIndexes() {
   return [];
 }
 
+function onTextChanged() {
+  const text = $("div", target)?.innerHTML;
+  const indexes = getProjectIndexes();
+
+  const progress = $("#holder_slide_progress").innerText;
+  const key = $("#holder_key_signature").innerText;
+  const title = $("#holder_title").innerText;
+
+  indexes.forEach(index => {
+    projectText(
+      `
+          <h1 class="reference">
+            ${progress ? `<span class="version">${progress}</span>` : ""}
+            ${key ? `<span class="version">${key}</span>` : ""}
+            ${title}
+          </h1>
+          <div class="singlelines">${text}</div>
+        `,
+      false,
+      index
+    );
+  });
+}
+
 const observer = new MutationObserver(mutations => {
-  mutations.forEach(m => {
-    console.log("Norless text changed:", m);
+  mutations.forEach(() => {
+    console.info("Norless text changed");
 
-    const text = target.querySelector("div")?.innerHTML;
-    const indexes = getProjectIndexes();
-
-    indexes.forEach(index => {
-      projectText(`<div class="singlelines">${text}</div>`, false, index);
-    });
+    onTextChanged();
   });
 });
 

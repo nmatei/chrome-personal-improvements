@@ -28,12 +28,13 @@
     },
 
     {
-      "matches": ["http://app-DISABLED.norless.com/*"],
+      "matches": ["http://app.norless.com/*"],
       "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/index.js"]
     },
     {
-      "matches": ["http://app-DISABLED.norless.com/template/output.html"],
-      "css": ["views/norless/output-overrides.css"]
+      "matches": ["http://app.norless.com/template/output.html"],
+      "css": ["views/norless/output-overrides.css"],
+      "js": ["views/norless/runtime-messages.js", "views/norless/text-changed.js"]
     },
 
     {

@@ -1,8 +1,6 @@
 const backgroundImgOpacity = "backgroundImgOpacity";
 const pageBackgroundColor = "pageBackgroundColor";
 
-// TODO import simple Prompt from [Project verses from bible.com]
-
 function getProjectTextSettings() {
   const saved = localStorage.getItem("projectTextSettings");
   if (saved) {
@@ -24,9 +22,9 @@ function getCommonMenuItems(e) {
       text: "background color",
       icon: "🎨",
       itemId: "pageBackgroundColor",
-      handler: () => {
+      handler: async () => {
         const oldColor = getPageBackgroundColor();
-        const color = prompt("set background color (eg. #82663a)", oldColor);
+        const color = await simplePrompt("set background color (eg. #82663a)", oldColor);
         setPageBackgroundColor(color);
       }
     },
@@ -34,9 +32,9 @@ function getCommonMenuItems(e) {
       text: "background opacity",
       icon: "⬛",
       itemId: "backgroundImgOpacity",
-      handler: () => {
+      handler: async () => {
         const oldOpacity = getBackgroundImgOpacity();
-        const opacity = prompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
+        const opacity = await simplePrompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
         setBackgroundImageOpacity(opacity);
         // TODO update output page in case we changed from main screen
       }
@@ -71,7 +69,8 @@ function getCommonMenuItems(e) {
           true
         );
 
-        showBy(menu, e.target);
+        //showBy(menu, e.target);
+        showByCursor(menu, e);
       }
     }
   ];
@@ -111,7 +110,18 @@ function getBackgroundImgOpacity() {
   return localStorage.getItem(backgroundImgOpacity) || "0";
 }
 
+function updateAppTitle() {
+  if (window.location.hostname === "app-ua.norless.com") {
+    const title = $("title");
+    if (title) {
+      title.textContent = "Norless 🇺🇦";
+    }
+  }
+}
+
 async function initEvents() {
+  updateAppTitle();
+
   if (window.location.pathname === "/template/output.html") {
     document.body.addEventListener(
       "contextmenu",
