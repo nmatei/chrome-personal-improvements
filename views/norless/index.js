@@ -1,5 +1,9 @@
 const backgroundImgOpacity = "backgroundImgOpacity";
 const pageBackgroundColor = "pageBackgroundColor";
+const backgroundMode = "backgroundMode";
+
+// Track output windows opened from this page
+let outputWindows = [];
 
 function getProjectTextSettings() {
   const saved = localStorage.getItem("projectTextSettings");
@@ -17,36 +21,67 @@ function saveProjectTextSettings(settings) {
 }
 
 function getCommonMenuItems(e) {
+  const settings = getProjectTextSettings();
+  const backgroundMode = getBackgroundMode();
+
   return [
     {
-      text: "background color",
-      icon: "🎨",
-      itemId: "pageBackgroundColor",
-      handler: async () => {
-        const oldColor = getPageBackgroundColor();
-        const color = await simplePrompt("set background color (eg. #82663a)", oldColor);
-        setPageBackgroundColor(color);
-      }
-    },
-    {
-      text: "background opacity",
-      icon: "⬛",
-      itemId: "backgroundImgOpacity",
-      handler: async () => {
-        const oldOpacity = getBackgroundImgOpacity();
-        const opacity = await simplePrompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
-        setBackgroundImageOpacity(opacity);
-        // TODO update output page in case we changed from main screen
-      }
-    },
-    {
-      text: "Project on [Project verses from bible.com]",
+      text: "Background",
+      shortcut: backgroundMode === "color" ? getPageBackgroundColor() : "Image",
       rightIcon: icons.rightArrow,
-      icon: "📤",
+      icon: "🎨",
+      itemId: "background-settings",
+      handler: async () => {
+        const menu = getContextMenu(
+          [
+            {
+              text: "Color",
+              icon: backgroundMode === "color" ? icons.checked : icons.unchecked,
+              itemId: "pageBackgroundColor",
+              rightIcon: "🎨",
+              shortcut: getPageBackgroundColor(),
+              handler: async () => {
+                await toggleBackgroundMode("color");
+                const oldColor = getPageBackgroundColor();
+                const color = await simplePrompt("set background color (eg. #82663a)", oldColor);
+                setPageBackgroundColor(color);
+              }
+            },
+            {
+              text: "Image",
+              icon: backgroundMode === "image" ? icons.checked : icons.unchecked,
+              itemId: "backgroundImage",
+              rightIcon: "🧩",
+              handler: async () => {
+                await toggleBackgroundMode("image");
+              }
+            },
+            "-",
+            {
+              text: "Opacity",
+              icon: icons.settings,
+              itemId: "backgroundImgOpacity",
+              //rightIcon: "⬛",
+              shortcut: getBackgroundImgOpacity() + "%",
+              handler: async () => {
+                const oldOpacity = getBackgroundImgOpacity();
+                const opacity = await simplePrompt("set opacity percentage [ 0 - 100 ]", oldOpacity);
+                setBackgroundImageOpacity(opacity);
+              }
+            }
+          ],
+          true
+        );
+        showByCursor(menu, e);
+      }
+    },
+    {
+      text: "Project verses from bible.com",
+      shortcut: shortWindowNameMapping[settings.window],
+      icon: icons.liveChat,
+      rightIcon: icons.rightArrow,
       itemId: "projectText",
       handler: async () => {
-        const settings = getProjectTextSettings();
-
         const menu = getContextMenu(
           [
             `Select window to project to:`,
@@ -55,7 +90,8 @@ function getCommonMenuItems(e) {
             "-",
             {
               text: "Configure EXTENSION_ID",
-              icon: "⚙️",
+              //icon: "⚙️",
+              icon: icons.settings,
               itemId: "configureExtensionId",
               handler: async () => {
                 const EXTENSION_ID = await simplePrompt("Sync with EXTENSION_ID for [Project verses from bible.com]!", settings.extensionId);
@@ -76,14 +112,21 @@ function getCommonMenuItems(e) {
   ];
 }
 
-function getProjectWindowsSelectionMenu(win) {
-  const text = {
-    0: "Disable projection",
-    1: "Project to window 1",
-    2: "Project to window 2",
-    3: "Project to both windows"
-  };
+const shortWindowNameMapping = {
+  0: "Disabled",
+  1: "Window 1",
+  2: "Window 2",
+  3: "Both windows"
+};
 
+const windowNameMapping = {
+  0: "Disable projection",
+  1: "Project to window 1",
+  2: "Project to window 2",
+  3: "Project to both windows"
+};
+
+function getProjectWindowsSelectionMenu(win) {
   async function handler(el, item) {
     const settings = getProjectTextSettings();
     saveProjectTextSettings({ ...settings, window: item.data.state });
@@ -91,7 +134,7 @@ function getProjectWindowsSelectionMenu(win) {
 
   return [0, 1, 2, 3].map(n => {
     return {
-      text: text[n],
+      text: windowNameMapping[n],
       icon: win === n ? icons.checked : icons.unchecked,
       itemId: "projectWindow" + n,
       data: {
@@ -101,6 +144,10 @@ function getProjectWindowsSelectionMenu(win) {
       handler
     };
   });
+}
+
+function getBackgroundMode() {
+  return localStorage.getItem(backgroundMode) || "color";
 }
 
 function getPageBackgroundColor() {
@@ -134,14 +181,54 @@ async function initEvents() {
       },
       false
     );
-    const backgroundMode = localStorage.getItem("backgroundMode");
-    toggleBackgroundMode(backgroundMode);
+    const backgroundMode = getBackgroundMode();
+    if (backgroundMode === "image") {
+      document.body.classList.add("background-image");
+    }
+
+    // Listen for messages from main page
+    window.addEventListener("message", e => {
+      // Verify message is from same origin
+      if (e.origin !== window.location.origin) return;
+
+      const message = e.data;
+      if (message.action === "toggleBackground") {
+        document.body.classList.remove("background-image");
+        if (message.mode === "image") {
+          document.body.classList.add("background-image");
+        }
+        localStorage.setItem(backgroundMode, message.mode);
+      } else if (message.action === "updateOpacity") {
+        setBackgroundImageOpacity(message.opacity);
+      } else if (message.action === "updateColor") {
+        setPageBackgroundColor(message.color);
+      }
+    });
+
+    // Register this window with opener
+    if (window.opener && !window.opener.closed) {
+      window.opener.postMessage({ action: "registerOutput" }, window.location.origin);
+    }
+
     const opacity = getBackgroundImgOpacity();
     setBackgroundImageOpacity(opacity);
 
     const pageBackgroundColor = getPageBackgroundColor();
     setPageBackgroundColor(pageBackgroundColor);
   } else {
+    // Listen for output window registration
+    window.addEventListener("message", e => {
+      if (e.origin !== window.location.origin) return;
+
+      if (e.data.action === "registerOutput" && e.source) {
+        // Add to tracked windows if not already present
+        if (!outputWindows.includes(e.source)) {
+          outputWindows.push(e.source);
+          console.info("Output window registered");
+        }
+      }
+    });
+
     const playlist = await waitElement("#playlist");
     playlist &&
       playlist.addEventListener(
@@ -159,33 +246,48 @@ async function initEvents() {
 }
 
 function showOutputContextMenu(e) {
-  const backgroundMode = localStorage.getItem("backgroundMode");
-
-  const menu = getContextMenu([
-    {
-      text: "background image",
-      icon: backgroundMode === "background-image" ? "🔲" : "🧩",
-      itemId: "background",
-      handler: () => {
-        toggleBackgroundMode("background-image");
-      }
-    },
-    ...getCommonMenuItems(e)
-  ]);
+  const menu = getContextMenu([...getCommonMenuItems(e)]);
   showByCursor(menu, e);
 }
 
-function toggleBackgroundMode(cls) {
-  if (cls) {
-    const toggle = document.body.classList.toggle(cls);
-    localStorage.setItem("backgroundMode", toggle ? cls : "");
+async function toggleBackgroundMode(mode) {
+  if (mode) {
+    const currentMode = getBackgroundMode();
+    const newMode = currentMode === mode ? "color" : mode;
+    localStorage.setItem(backgroundMode, newMode);
+
+    // Update current page
+    document.body.classList.remove("background-image");
+    if (newMode === "image") {
+      document.body.classList.add("background-image");
+    }
+
+    // Notify output windows
+    notifyOutputWindows({ action: "toggleBackground", mode: newMode });
   }
+}
+
+function notifyOutputWindows(message) {
+  // Clean up closed windows
+  outputWindows = outputWindows.filter(win => win && !win.closed);
+
+  // Send message to all open output windows
+  outputWindows.forEach(win => {
+    try {
+      win.postMessage(message, window.location.origin);
+    } catch (error) {
+      console.debug("Failed to send message to output window:", error.message);
+    }
+  });
 }
 
 function setPageBackgroundColor(color) {
   localStorage.setItem(pageBackgroundColor, color);
   const root = $(":root");
   root.style.setProperty("--" + pageBackgroundColor, color);
+
+  // Notify output windows
+  notifyOutputWindows({ action: "updateColor", color });
 }
 
 function setBackgroundImageOpacity(opacity) {
@@ -198,6 +300,9 @@ function setBackgroundImageOpacity(opacity) {
   localStorage.setItem(backgroundImgOpacity, opacity + "");
   const root = $(":root");
   root.style.setProperty("--" + backgroundImgOpacity, opacity / 100 + "");
+
+  // Notify output windows
+  notifyOutputWindows({ action: "updateOpacity", opacity });
 }
 
 function showContextMenu(e) {
@@ -205,7 +310,7 @@ function showContextMenu(e) {
   const menu = getContextMenu([
     {
       text: "Save Playlist as HTML",
-      icon: "📩",
+      icon: icons.export,
       itemId: "printable",
       onmouseenter: storeText,
       handler: target => {
@@ -214,13 +319,14 @@ function showContextMenu(e) {
     },
     {
       text: "Copy Playlist to Clipboard",
-      icon: "📋",
+      icon: icons.copy,
       itemId: "copy",
       onmouseenter: storeText,
       handler: async target => {
         await copyPlaylist(target);
       }
     },
+    "-",
     ...getCommonMenuItems(e)
   ]);
   showByCursor(menu, e);
