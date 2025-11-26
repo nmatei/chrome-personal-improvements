@@ -4,6 +4,7 @@ const backgroundMode = "backgroundMode";
 
 // Track output windows opened from this page
 let outputWindows = [];
+const defaultExtensionId = "fklnkmnlobkpoiifnbnemdpamheoanpj"; // production ID
 
 function getProjectTextSettings() {
   const saved = localStorage.getItem("projectTextSettings");
@@ -11,7 +12,7 @@ function getProjectTextSettings() {
     return JSON.parse(saved);
   }
   return {
-    extensionId: "fklnkmnlobkpoiifnbnemdpamheoanpj", // production ID
+    extensionId: defaultExtensionId,
     window: 0 // 0 = disabled, 1 = window 1, 2 = window 2, 3 = both windows
   };
 }
@@ -94,7 +95,13 @@ function getCommonMenuItems(e) {
               icon: icons.settings,
               itemId: "configureExtensionId",
               handler: async () => {
-                const EXTENSION_ID = await simplePrompt("Sync with EXTENSION_ID for [Project verses from bible.com]!", settings.extensionId);
+                const EXTENSION_ID = await simplePrompt(
+                  `
+                    <p>Sync with EXTENSION_ID for [Project verses from bible.com]!</p>
+                    <p style="line-height: 2.3em">Default Production ID: <span class="key-code">${defaultExtensionId}</span></p>
+                  `,
+                  settings.extensionId
+                );
                 saveProjectTextSettings({
                   ...settings,
                   extensionId: EXTENSION_ID

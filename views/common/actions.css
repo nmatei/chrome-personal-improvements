@@ -6,7 +6,10 @@
   font-family: ArialMT, Helvetica Neue, Arial, Liberation Sans, FreeSans, sans-serif;
 }
 
-.context-menu .key-code {
+.context-menu .key-code,
+#custom-prompt .key-code {
+  user-select: text;
+  -webkit-user-select: text;
   background-color: #22222230;
   border: 1px solid #22222250;
   font-size: 0.8em;
