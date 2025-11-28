@@ -2,8 +2,10 @@
  * @param {String} text
  * @param {Boolean} markdown
  * @param {Number} index
+ * @param {Boolean} nonBreakingHyphens
+ * @return {Promise<any>}
  */
-async function projectText(text, markdown = false, index) {
+async function projectText(text, markdown = false, index, nonBreakingHyphens = false) {
   const settings = getProjectTextSettings();
 
   console.info("Sending text to Norless runtime: %o", index, { text, markdown });
@@ -14,7 +16,8 @@ async function projectText(text, markdown = false, index) {
       payload: {
         text,
         markdown,
-        index
+        index,
+        nonBreakingHyphens
       }
     });
   } catch (error) {

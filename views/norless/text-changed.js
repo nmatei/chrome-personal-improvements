@@ -28,8 +28,15 @@ function onTextChanged() {
   // "margin-top" - Uses a regular hyphen-minus (Unicode U+002D) / &#45;
 
   // TODO solutions to try for nextline:
-  //  - margin: 1em 0 0 0; => this is not last line in screen (but has some space - acceptable for now)
+  //  - margin: 1em 0 0 0; => this is not last line in screen (but has some space - acceptable for)
   //  - position: fixed; bottom: 10px; -> this may overlap with other elements (in case of many lines)
+
+  // const nextLineStyle = "opacity: 0.5; margin: 1em 0 0 0;";
+  // const nextLineStyle = "opacity: 0.5; margin-top: 1em;";
+  // const nextLineStyle = "opacity: 0.5; position: fixed; bottom: 10px; z-index: -1;"; // (will be under other elements if overlapping)
+  const nextLineStyle = "opacity: 0.5; position: fixed; bottom: 10px; padding: 0 0 0 0.5em;"; // (will be under other elements if overlapping)
+
+  // leave some space at bottom if next line exists (1.2em should be enough for one line)
 
   indexes.forEach(index => {
     projectText(
@@ -39,8 +46,10 @@ function onTextChanged() {
             ${key ? `<span class="version">${key}</span>` : ""}
             ${title}
           </h1>
-          <div class="singlelines">${text}</div>
-          ${nextLine ? `<div class="singlelines nextline" style="opacity: 0.5; margin: 1em 0 0 0;"><p>${nextLine}</p></div>` : ""}
+          <div class="singlelines" style="${nextLine ? "padding: 0 0 1.2em 0;" : ""}">
+            ${text}
+          </div>
+          ${nextLine ? `<div class="singlelines nextline" style="${nextLineStyle}"><p>${nextLine}</p></div>` : ""}
         `,
       false,
       index
