@@ -5,13 +5,11 @@
  * @param {Boolean} nonBreakingHyphens
  * @return {Promise<any>}
  */
-async function projectText(text, markdown = false, index, nonBreakingHyphens = false) {
-  const settings = getProjectTextSettings();
-
+async function projectText(extensionId, text, markdown = false, index, nonBreakingHyphens = false) {
   console.info("Sending text to Norless runtime: %o", index, { text, markdown });
 
   try {
-    return await chrome.runtime.sendMessage(settings.extensionId, {
+    return await chrome.runtime.sendMessage(extensionId, {
       action: "updateText",
       payload: {
         text,

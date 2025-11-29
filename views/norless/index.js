@@ -4,22 +4,6 @@ const backgroundMode = "backgroundMode";
 
 // Track output windows opened from this page
 let outputWindows = [];
-const defaultExtensionId = "fklnkmnlobkpoiifnbnemdpamheoanpj"; // production ID
-
-function getProjectTextSettings() {
-  const saved = localStorage.getItem("projectTextSettings");
-  if (saved) {
-    return JSON.parse(saved);
-  }
-  return {
-    extensionId: defaultExtensionId,
-    window: 0 // 0 = disabled, 1 = window 1, 2 = window 2, 3 = both windows
-  };
-}
-
-function saveProjectTextSettings(settings) {
-  localStorage.setItem("projectTextSettings", JSON.stringify(settings));
-}
 
 function getCommonMenuItems(e) {
   const settings = getProjectTextSettings();
@@ -77,8 +61,8 @@ function getCommonMenuItems(e) {
       }
     },
     {
-      text: "Project verses from bible.com",
-      shortcut: shortWindowNameMapping[settings.window],
+      text: extensionName,
+      shortcut: shortWindowNameMapping[settings.displayWindow],
       icon: icons.liveChat,
       rightIcon: icons.rightArrow,
       itemId: "projectText",
@@ -87,7 +71,7 @@ function getCommonMenuItems(e) {
           [
             `Select window to project to:`,
             "-",
-            ...getProjectWindowsSelectionMenu(settings.window),
+            ...getProjectWindowsSelectionMenu(settings.displayWindow),
             "-",
             {
               text: "Configure EXTENSION_ID",
@@ -97,8 +81,8 @@ function getCommonMenuItems(e) {
               handler: async () => {
                 const EXTENSION_ID = await simplePrompt(
                   `
-                    <p>Sync with EXTENSION_ID for [Project verses from bible.com]!</p>
-                    <p style="line-height: 2.3em">Default Production ID: <span class="key-code">${defaultExtensionId}</span></p>
+                    <p>Sync with EXTENSION_ID for [${extensionName}]!</p>
+                    <p style="line-height: 2.3em">Default Production ID: <span class="key-code">${defaultBibleExtensionId}</span></p>
                   `,
                   settings.extensionId
                 );
@@ -119,24 +103,13 @@ function getCommonMenuItems(e) {
   ];
 }
 
-const shortWindowNameMapping = {
-  0: "Disabled",
-  1: "Window 1",
-  2: "Window 2",
-  3: "Both windows"
-};
-
-const windowNameMapping = {
-  0: "Disable projection",
-  1: "Project to window 1",
-  2: "Project to window 2",
-  3: "Project to both windows"
-};
-
 function getProjectWindowsSelectionMenu(win) {
   async function handler(el, item) {
     const settings = getProjectTextSettings();
-    saveProjectTextSettings({ ...settings, window: item.data.state });
+    saveProjectTextSettings({
+      ...settings,
+      displayWindow: item.data.state
+    });
   }
 
   return [0, 1, 2, 3].map(n => {
@@ -340,3 +313,4 @@ function showContextMenu(e) {
 }
 
 initEvents();
+initEventsOnTextChanged();

@@ -29,22 +29,22 @@
 
     {
       "matches": ["http://app.norless.com/*"],
-      "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/index.js"]
+      "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/bible-verses-integration.js", "views/norless/index.js"]
     },
     {
       "matches": ["http://app.norless.com/template/output.html"],
       "css": ["views/norless/output-overrides.css"],
-      "js": ["views/norless/runtime-messages.js", "views/norless/text-changed.js"]
+      "js": ["views/norless/runtime-messages.js", "views/norless/bible-verses-integration.js"]
     },
 
     {
       "matches": ["http://app-ua.norless.com/*"],
-      "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/index.js"]
+      "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/bible-verses-integration.js", "views/norless/index.js"]
     },
     {
       "matches": ["http://app-ua.norless.com/template/output.html"],
       "css": ["views/norless/output-overrides.css"],
-      "js": ["views/norless/runtime-messages.js", "views/norless/text-changed.js"]
+      "js": ["views/norless/runtime-messages.js", "views/norless/bible-verses-integration.js"]
     },
 
     {
