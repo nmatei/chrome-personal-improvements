@@ -66,16 +66,24 @@ function getProjectIndexes(displayWindow) {
   return [];
 }
 
-function onTextChanged() {
-  const text = $("div", changeContentTarget)?.innerHTML;
+function onTextChanged(splitTitle) {
+  const textWrapper = $("div", changeContentTarget);
+  // using innerText to get only visible parts and ignore chord (eg. <span class="chord">Intro</span>)
+  const paragraphsText = $$("p", textWrapper).map(p => `<p>${p.innerText}</p>`);
+  const text = paragraphsText.join("");
+
   const { extensionId, displayWindow } = getProjectTextSettings();
 
   const indexes = getProjectIndexes(displayWindow);
 
   const progress = $("#holder_slide_progress").innerText;
   const key = $("#holder_key_signature").innerText;
-  const title = $("#holder_title").innerText;
+  let title = $("#holder_title").innerText;
   const nextLine = $("#holder_next_line div")?.innerText;
+
+  if (splitTitle && title.includes("/")) {
+    title = title.split("/")[1].trim();
+  }
 
   // leave some space at bottom if next line exists (1.2em should be enough for one line)
   const nextLineStyle = "opacity: 0.5; position: fixed; bottom: 10px; padding: 0 0 0 0.5em;";
@@ -107,15 +115,20 @@ function onTextChanged() {
 // Exported function
 // =======================
 function initEventsOnTextChanged() {
+  if (window.location.pathname !== "/template/output.html") {
+    return;
+  }
   if (!changeContentTarget) {
     console.info("Norless text change target not found");
     return;
   }
 
+  const splitTitle = window.location.hostname === "app-ua.norless.com";
+
   const observer = new MutationObserver(mutations => {
     mutations.forEach(() => {
       console.info("Norless text changed");
-      onTextChanged();
+      onTextChanged(splitTitle);
     });
   });
   observer.observe(changeContentTarget, {
