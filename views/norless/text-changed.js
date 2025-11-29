@@ -1,4 +1,5 @@
 const target = $("#holder_text");
+let lastProjectedText = "";
 
 function getProjectIndexes() {
   const settings = getProjectTextSettings();
@@ -27,22 +28,26 @@ function onTextChanged() {
   // leave some space at bottom if next line exists (1.2em should be enough for one line)
   const nextLineStyle = "opacity: 0.5; position: fixed; bottom: 10px; padding: 0 0 0 0.5em;";
 
+  const textToProject = `
+    <h1 class="reference">
+      ${progress ? `<span class="version">${progress}</span>` : ""}
+      ${key ? `<span class="version">${key}</span>` : ""}
+      ${title}
+    </h1>
+    <div class="singlelines" style="${nextLine ? "padding: 0 0 1.2em 0;" : ""}">
+      ${text}
+    </div>
+    ${nextLine ? `<div class="singlelines nextline" style="${nextLineStyle}"><p>${nextLine}</p></div>` : ""}
+  `;
+
+  if (textToProject === lastProjectedText) {
+    console.info("Norless text unchanged, not projecting");
+    return;
+  }
+
+  lastProjectedText = textToProject;
   indexes.forEach(index => {
-    projectText(
-      `
-          <h1 class="reference">
-            ${progress ? `<span class="version">${progress}</span>` : ""}
-            ${key ? `<span class="version">${key}</span>` : ""}
-            ${title}
-          </h1>
-          <div class="singlelines" style="${nextLine ? "padding: 0 0 1.2em 0;" : ""}">
-            ${text}
-          </div>
-          ${nextLine ? `<div class="singlelines nextline" style="${nextLineStyle}"><p>${nextLine}</p></div>` : ""}
-        `,
-      false,
-      index
-    );
+    projectText(textToProject, false, index);
   });
 }
 
