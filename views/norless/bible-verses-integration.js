@@ -69,7 +69,8 @@ function getProjectIndexes(displayWindow) {
 function onTextChanged(splitTitle) {
   const textWrapper = $("div", changeContentTarget);
   // using innerText to get only visible parts and ignore chord (eg. <span class="chord">Intro</span>)
-  const paragraphsText = $$("p", textWrapper).map(p => `<p>${p.innerText}</p>`);
+  // TODO remove 'strong' tag and allow styling from projected text?
+  const paragraphsText = $$("p", textWrapper).map(p => `<p><strong>${p.innerText}</strong></p>`);
   const text = paragraphsText.join("");
 
   const { extensionId, displayWindow } = getProjectTextSettings();
@@ -94,7 +95,7 @@ function onTextChanged(splitTitle) {
       ${key ? `<span class="version">${key}</span>` : ""}
       ${title}
     </h1>
-    <div class="singlelines" style="${nextLine ? "padding: 0 0 1.2em 0;" : ""}">
+    <div class="singlelines bold" style="${nextLine ? "padding: 0 0 1.2em 0;" : ""}">
       ${text}
     </div>
     ${nextLine ? `<div class="singlelines nextline" style="${nextLineStyle}"><p>${nextLine}</p></div>` : ""}
