@@ -11,7 +11,7 @@
   "permissions": ["activeTab", "storage", "clipboardWrite"],
   "content_scripts": [
     {
-      "matches": ["https://*.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "http://*.norless.com/*"],
+      "matches": ["https://*.fusionsolar.huawei.com/*", "https://twitter.com/home/*"],
       "js": ["views/icons/icons.js", "views/common/utilities.js", "views/common/tooltip/tooltip.js", "views/common/simplePrompt/simplePrompt.js"],
       "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css", "views/common/simplePrompt/simplePrompt.css", "views/common/actions.css"],
       "run_at": "document_end"
@@ -28,34 +28,8 @@
     },
 
     {
-      "matches": ["http://app.norless.com/*"],
-      "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/bible-verses-integration.js", "views/norless/index.js"]
-    },
-    {
-      "matches": ["http://app.norless.com/template/output.html"],
-      "css": ["views/norless/output-overrides.css"],
-      "js": ["views/norless/runtime-messages.js", "views/norless/bible-verses-integration.js"]
-    },
-
-    {
-      "matches": ["http://app-ua.norless.com/*"],
-      "js": ["views/norless/selectors.js", "views/norless/print.js", "views/norless/bible-verses-integration.js", "views/norless/index.js"]
-    },
-    {
-      "matches": ["http://app-ua.norless.com/template/output.html"],
-      "css": ["views/norless/output-overrides.css"],
-      "js": ["views/norless/runtime-messages.js", "views/norless/bible-verses-integration.js"]
-    },
-
-    {
       "matches": ["https://eu.salusconnect.io/*", "https://qa.eu.salusconnect.io/*"],
       "css": ["views/salusconnect/overrides.css"]
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["views/norless/background.jpg"],
-      "matches": ["http://*.norless.com/*"]
     }
   ],
   "icons": {
