@@ -91,7 +91,7 @@ function onTextChanged(splitTitle) {
   }
 
   // leave some space at bottom if next line exists (1.2em should be enough for one line)
-  const nextLineStyle = "opacity: 0.5; position: fixed; bottom: 10px; padding: 0 0 0 0.5em;";
+  const nextLineStyle = "opacity: 0.5; position: fixed; bottom: 10px; font-size: 0.9em;";
 
   const textToProject = `
     <h1 class="reference">
