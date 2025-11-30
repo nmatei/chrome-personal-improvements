@@ -8,6 +8,10 @@ const changeContentTarget = $("#holder_text");
 // Itegration with: [Project verses from bible.com] Extension
 // =======================
 
+// TODOs:
+// - allod more styling options? (bold, italic, colors, etc, extra classes?)
+// - extract it to a separate extension only for 'norrless'
+
 const extensionName = "Project verses from bible.com";
 const defaultBibleExtensionId = "fklnkmnlobkpoiifnbnemdpamheoanpj";
 
