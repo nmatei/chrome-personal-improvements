@@ -1,6 +1,6 @@
 {
   "name": "Personal improvements",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Chrome Personal improvements ✨",
   "manifest_version": 3,
   "author": "Matei Nicolae",
@@ -11,7 +11,13 @@
   "permissions": ["activeTab", "storage", "clipboardWrite"],
   "content_scripts": [
     {
-      "matches": ["https://*.fusionsolar.huawei.com/*", "https://twitter.com/home/*"],
+      "matches": [
+        "https://*.fusionsolar.huawei.com/*",
+        "https://twitter.com/home/*",
+        "https://glossa.live/*",
+        "https://eu.salusconnect.io/*",
+        "https://qa.eu.salusconnect.io/*"
+      ],
       "js": ["views/icons/icons.js", "views/common/utilities.js", "views/common/tooltip/tooltip.js", "views/common/simplePrompt/simplePrompt.js"],
       "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css", "views/common/simplePrompt/simplePrompt.css", "views/common/actions.css"],
       "run_at": "document_end"
@@ -20,6 +26,11 @@
       "matches": ["https://*.fusionsolar.huawei.com/*"],
       "js": ["views/fusionsolar.huawei/index.js"],
       "css": ["views/fusionsolar.huawei/overrides.css"]
+    },
+    {
+      "matches": ["https://glossa.live/*"],
+      "js": ["views/glossa/index.js"],
+      "css": ["views/glossa/overrides.css"]
     },
     {
       "matches": ["https://twitter.com/home/*"],
