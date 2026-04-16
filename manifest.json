@@ -11,13 +11,7 @@
   "permissions": ["activeTab", "storage", "clipboardWrite"],
   "content_scripts": [
     {
-      "matches": [
-        "https://*.fusionsolar.huawei.com/*",
-        "https://twitter.com/home/*",
-        "https://glossa.live/*",
-        "https://eu.salusconnect.io/*",
-        "https://qa.eu.salusconnect.io/*"
-      ],
+      "matches": ["https://*.fusionsolar.huawei.com/*", "https://twitter.com/home/*", "https://eu.salusconnect.io/*", "https://qa.eu.salusconnect.io/*"],
       "js": ["views/icons/icons.js", "views/common/utilities.js", "views/common/tooltip/tooltip.js", "views/common/simplePrompt/simplePrompt.js"],
       "css": ["views/common/colors.css", "views/common/tooltip/tooltip.css", "views/common/simplePrompt/simplePrompt.css", "views/common/actions.css"],
       "run_at": "document_end"
@@ -28,16 +22,10 @@
       "css": ["views/fusionsolar.huawei/overrides.css"]
     },
     {
-      "matches": ["https://glossa.live/*"],
-      "js": ["views/glossa/index.js"],
-      "css": ["views/glossa/overrides.css"]
-    },
-    {
       "matches": ["https://twitter.com/home/*"],
       "js": ["views/twitter/index.js"],
       "css": ["views/twitter/overrides.css"]
     },
-
     {
       "matches": ["https://eu.salusconnect.io/*", "https://qa.eu.salusconnect.io/*"],
       "css": ["views/salusconnect/overrides.css"]
